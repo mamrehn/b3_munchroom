@@ -1,0 +1,1 @@
+To play, type `npm run dev`.

@@ -34,3 +34,10 @@ The players cannot leave the current camera view.
 The zoom out is too fast. also, currently the upper left corner is fixed and the view shrinks. But actually, the world to the left and right was meant to expand. So the floor for the players is still the same vertial position with each zoom level.
 
 Also, the floating platforms are currerly too high to reach by jumping. They are also too few.
+
+## Steering 2.1
+
+The throw is too horizontal. I want the players to start the throw at an approximately 45′ degree angle. The Mushroom shall not bounce as much and roll only very slightly before staying in place for about 1 second. then disappear.
+
+Also, tall players do not seem to be able to hit small players well currently.
+

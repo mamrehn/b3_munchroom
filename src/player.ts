@@ -162,9 +162,12 @@ export class Player {
     if (input.throw && this.throwTimer <= 0) {
       this.throwTimer = this.throwCooldown;
       audio.playThrow();
+      // Spawn mushroom at ~waist height so big players can still hit small ones.
+      // Cap the spawn height to BASE_PLAYER_H above feet regardless of thrower size.
+      const spawnY = this.y - Math.min(this.h * 0.5, BASE_PLAYER_H);
       return new Mushroom(
         this.x + (this.facingRight ? this.w * 0.6 : -this.w * 0.6),
-        this.y - this.h * 0.5,
+        spawnY,
         this.facingRight,
         this.index,
         this.size,
