@@ -41,3 +41,7 @@ The throw is too horizontal. I want the players to start the throw at an approxi
 
 Also, tall players do not seem to be able to hit small players well currently.
 
+## Chore
+
+Can you add a github action such that the game build and is available as github pages on every commit?
+
