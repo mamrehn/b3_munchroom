@@ -29,8 +29,8 @@ export const MUSHROOM_W = 30;
 export const MUSHROOM_H = 30;
 
 // Camera
-export const CAMERA_ZOOM_SPEED = 0.008;  // zoom-out units per second
-export const CAMERA_MIN_ZOOM = 0.22;
+export const CAMERA_ZOOM_SPEED = 0.0015; // zoom-out units per second (slow)
+export const CAMERA_MIN_ZOOM = 0.48;     // stop when full world width ~fits
 
 // Round
 export const NO_HIT_TIMEOUT = 30;     // seconds

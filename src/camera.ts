@@ -17,7 +17,8 @@ export class Camera {
   y = 0;
 
   constructor() {
-    this.zoom = Math.min(CANVAS_W / WORLD_W, CANVAS_H / WORLD_H);
+    // Start zoomed in; the game slowly zooms out to reveal the world horizontally
+    this.zoom = 1.0;
   }
 
   /** Call each frame with two player world positions. */
@@ -25,18 +26,20 @@ export class Camera {
     // Zoom out slowly
     this.zoom = Math.max(CAMERA_MIN_ZOOM, this.zoom - CAMERA_ZOOM_SPEED * dt);
 
-    // Centre viewport between the two players
-    const cx = (p1.x + p2.x) / 2;
-    const cy = (p1.y + p2.y) / 2;
-
-    this.x = cx - (CANVAS_W / this.zoom) / 2;
-    this.y = cy - (CANVAS_H / this.zoom) / 2;
-
-    // Clamp to world bounds
+    // ── Horizontal: track player midpoint, clamp to world ──────────────────
     const vw = CANVAS_W / this.zoom;
-    const vh = CANVAS_H / this.zoom;
-    this.x = Math.max(0, Math.min(WORLD_W - vw, this.x));
-    this.y = Math.max(0, Math.min(WORLD_H - vh, this.y));
+    const cx = (p1.x + p2.x) / 2;
+    this.x = Math.max(0, Math.min(WORLD_W - vw, cx - vw / 2));
+
+    // ── Vertical: anchor the ground so it always appears near the bottom ───
+    // We want the ground surface (WORLD_H - 60) to sit at canvas y = CANVAS_H - 30,
+    // so the floor never drifts regardless of zoom level.
+    //   (groundWorldY - camera.y) * zoom = FLOOR_CANVAS_Y
+    //   camera.y = groundWorldY - FLOOR_CANVAS_Y / zoom
+    const FLOOR_CANVAS_Y = CANVAS_H - 30;  // pixels from canvas top to ground
+    const groundWorldY = WORLD_H - 60;
+    this.y = groundWorldY - FLOOR_CANVAS_Y / this.zoom;
+    if (this.y < 0) this.y = 0;            // never scroll above world top
   }
 
   /** Convert a world-space point to canvas-space. */
