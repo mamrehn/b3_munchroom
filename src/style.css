@@ -1,0 +1,114 @@
+/* ─────────────────────────────────────────────
+   MUNCHROOM – Global styles
+   ───────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --p1: #E8283C;
+  --p2: #2860C8;
+  --bg: #1a0a2e;
+  --panel: rgba(255,255,255,0.06);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  overflow: hidden;
+  color: #fff;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+
+/* ── Title bar ── */
+#titlebar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#titlebar h1 {
+  font-size: clamp(16px, 2.5vw, 32px);
+  background: linear-gradient(90deg, var(--p1), #FFD700, var(--p2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 4px;
+  text-shadow: none;
+  white-space: nowrap;
+}
+
+.logo {
+  font-size: clamp(22px, 3vw, 40px);
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Canvas wrapper ── */
+#canvasWrapper {
+  position: relative;
+  border: 3px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 0 40px rgba(232, 40, 60, 0.25),
+    0 0 40px rgba(40, 96, 200, 0.25),
+    inset 0 0 60px rgba(0,0,0,0.5);
+  line-height: 0; /* remove inline-block gap */
+}
+
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+/* ── Controls footer ── */
+#controls {
+  display: flex;
+  gap: 40px;
+  font-size: clamp(7px, 1vw, 11px);
+  opacity: 0.75;
+}
+
+.ctrl {
+  background: var(--panel);
+  padding: 6px 14px;
+  border-radius: 6px;
+  line-height: 1.8;
+}
+
+.ctrl.p1 { border-left: 3px solid var(--p1); }
+.ctrl.p2 { border-left: 3px solid var(--p2); }
+
+kbd {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: inherit;
+}
